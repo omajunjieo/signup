@@ -32,6 +32,13 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if (config('app.debug') && !$request->ajax()) {
+            $whoops = new \Whoops\Run;
+            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+            return $whoops->handleException($exception);
+        }
+        return parent::render($request, $exception);
+
         parent::report($exception);
     }
 
