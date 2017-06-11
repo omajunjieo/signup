@@ -16,7 +16,9 @@ class ActionController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $actions = Action::all();
+        return view('welcome', compact('actions'));
+
     }
 
     /**
@@ -24,6 +26,16 @@ class ActionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        if (Auth::check()) {
+            $uid = Auth::user()->id;
+            return view('create', compact('uid'));
+        } else {
+            return view('auth.login');
+        }
+    }
+
     public function create()
     {
         if (Auth::check()) {

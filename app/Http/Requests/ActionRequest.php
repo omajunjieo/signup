@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\ActionRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ActionRequest extends FormRequest
@@ -30,4 +31,13 @@ class ActionRequest extends FormRequest
 
         ];
     }
+    public function messages()
+    {
+        return [
+            'required' => '必填欄位',
+            'min'      => '至少要 :min 個字',
+            'max'      => '最多只能 :max 個字',
+        ];
+    }
+
 }
